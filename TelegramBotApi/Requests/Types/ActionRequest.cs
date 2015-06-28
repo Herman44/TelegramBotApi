@@ -1,7 +1,7 @@
-﻿using Api.Requests.Types.Interfaces;
-using TelegramBotApi.Http;
+﻿using TelegramBotApi.Http;
+using TelegramBotApi.Requests.Types.Interfaces;
 
-namespace Api.Requests.Types
+namespace TelegramBotApi.Requests.Types
 {
     public class ActionRequest : ITypeRequest
     {

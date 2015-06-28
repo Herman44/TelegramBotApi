@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Helpers;
-using Api.Requests.Types.Interfaces;
 using TelegramBotApi.Http;
+using TelegramBotApi.Requests.Types.Interfaces;
 
 namespace TelegramBotApi.Requests.Types
 {

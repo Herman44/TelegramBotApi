@@ -14,7 +14,7 @@ namespace TelegramBotApi
 {
     public class BotApi
     {
-        private DebugApi debug;
+        private DebugApi _debug;
 
         public BotApi(string apiToken, HttpRequestBase request, HttpServerUtilityBase server, bool enableDebug = false)
         {
@@ -27,14 +27,7 @@ namespace TelegramBotApi
 
         public DebugApi Debug
         {
-            get
-            {
-                if (debug == null)
-                {
-                    debug = new DebugApi(Server);
-                }
-                return debug;
-            }
+            get { return _debug ?? (_debug = new DebugApi(Server)); }
         }
 
         public int LastUpdateId
@@ -43,7 +36,7 @@ namespace TelegramBotApi
             set { File.WriteAllText(LastUpdateIdPath, Convert.ToString(value)); }
         }
 
-        private string ApiUrl
+        private static string ApiUrl
         {
             get { return "https://api.telegram.org"; }
         }
@@ -110,7 +103,10 @@ namespace TelegramBotApi
             using (var responseStream = response.GetResponseStream())
             using (var stream = new MemoryStream())
             {
-                responseStream.CopyTo(stream);
+                if (responseStream != null)
+                {
+                    responseStream.CopyTo(stream);
+                }
                 return Json.Decode(Encoding.UTF8.GetString(stream.ToArray()));
             }
         }

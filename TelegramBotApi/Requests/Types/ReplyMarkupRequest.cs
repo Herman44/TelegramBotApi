@@ -1,5 +1,5 @@
-﻿using Api.Requests.Types.Interfaces;
-using TelegramBotApi.Http;
+﻿using TelegramBotApi.Http;
+using TelegramBotApi.Requests.Types.Interfaces;
 
 namespace TelegramBotApi.Requests.Types
 {
@@ -13,52 +13,52 @@ namespace TelegramBotApi.Requests.Types
             ForceReply
         }
 
-        private ForceReplyRequest replyMarkupForceReply;
-        private ReplyKeyboardHideRequest replyMarkupReplyKeyboardHide;
-        private ReplyKeyboardMarkupRequest replyMarkupReplyKeyboardMarkup;
-        private ReplyMarkupTypes replyMarkupType = ReplyMarkupTypes.None;
+        private ForceReplyRequest _replyMarkupForceReply;
+        private ReplyKeyboardHideRequest _replyMarkupReplyKeyboardHide;
+        private ReplyKeyboardMarkupRequest _replyMarkupReplyKeyboardMarkup;
+        private ReplyMarkupTypes _replyMarkupType = ReplyMarkupTypes.None;
 
         public ReplyMarkupTypes ReplyMarkupType
         {
-            get { return replyMarkupType; }
+            get { return _replyMarkupType; }
         }
 
         public ReplyKeyboardMarkupRequest ReplyMarkupReplyKeyboardMarkup
         {
-            get { return replyMarkupReplyKeyboardMarkup; }
+            get { return _replyMarkupReplyKeyboardMarkup; }
             set
             {
-                replyMarkupReplyKeyboardMarkup = value;
-                replyMarkupReplyKeyboardHide = null;
-                replyMarkupForceReply = null;
+                _replyMarkupReplyKeyboardMarkup = value;
+                _replyMarkupReplyKeyboardHide = null;
+                _replyMarkupForceReply = null;
 
-                replyMarkupType = value == null ? ReplyMarkupTypes.None : ReplyMarkupTypes.ReplyKeyboardMarkup;
+                _replyMarkupType = value == null ? ReplyMarkupTypes.None : ReplyMarkupTypes.ReplyKeyboardMarkup;
             }
         }
 
         public ReplyKeyboardHideRequest ReplyMarkupReplyKeyboardHide
         {
-            get { return replyMarkupReplyKeyboardHide; }
+            get { return _replyMarkupReplyKeyboardHide; }
             set
             {
-                replyMarkupReplyKeyboardMarkup = null;
-                replyMarkupReplyKeyboardHide = value;
-                replyMarkupForceReply = null;
+                _replyMarkupReplyKeyboardMarkup = null;
+                _replyMarkupReplyKeyboardHide = value;
+                _replyMarkupForceReply = null;
 
-                replyMarkupType = value == null ? ReplyMarkupTypes.None : ReplyMarkupTypes.ReplyKeyboardHide;
+                _replyMarkupType = value == null ? ReplyMarkupTypes.None : ReplyMarkupTypes.ReplyKeyboardHide;
             }
         }
 
         public ForceReplyRequest ReplyMarkupForceReply
         {
-            get { return replyMarkupForceReply; }
+            get { return _replyMarkupForceReply; }
             set
             {
-                replyMarkupReplyKeyboardMarkup = null;
-                replyMarkupReplyKeyboardHide = null;
-                replyMarkupForceReply = value;
+                _replyMarkupReplyKeyboardMarkup = null;
+                _replyMarkupReplyKeyboardHide = null;
+                _replyMarkupForceReply = value;
 
-                replyMarkupType = value == null ? ReplyMarkupTypes.None : ReplyMarkupTypes.ForceReply;
+                _replyMarkupType = value == null ? ReplyMarkupTypes.None : ReplyMarkupTypes.ForceReply;
             }
         }
 

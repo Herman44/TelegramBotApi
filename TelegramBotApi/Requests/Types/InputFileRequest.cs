@@ -1,5 +1,5 @@
-﻿using Api.Requests.Types.Interfaces;
-using TelegramBotApi.Http;
+﻿using TelegramBotApi.Http;
+using TelegramBotApi.Requests.Types.Interfaces;
 
 namespace TelegramBotApi.Requests.Types
 {
@@ -11,19 +11,19 @@ namespace TelegramBotApi.Requests.Types
             File
         }
 
-        private byte[] file;
-        private string fileExtension;
-        private string fileId;
+        private byte[] _file;
+        private string _fileExtension;
+        private string _fileId;
         public InputFileTypes InputFileType { get; private set; }
 
         public string FileId
         {
-            get { return fileId; }
+            get { return _fileId; }
             set
             {
-                fileId = value;
-                fileExtension = null;
-                file = null;
+                _fileId = value;
+                _fileExtension = null;
+                _file = null;
 
                 InputFileType = InputFileTypes.String;
             }
@@ -31,11 +31,11 @@ namespace TelegramBotApi.Requests.Types
 
         public string FileExtension
         {
-            get { return fileExtension; }
+            get { return _fileExtension; }
             set
             {
-                fileId = null;
-                fileExtension = value;
+                _fileId = null;
+                _fileExtension = value;
 
                 InputFileType = InputFileTypes.File;
             }
@@ -43,11 +43,11 @@ namespace TelegramBotApi.Requests.Types
 
         public byte[] File
         {
-            get { return file; }
+            get { return _file; }
             set
             {
-                fileId = null;
-                file = value;
+                _fileId = null;
+                _file = value;
 
                 InputFileType = InputFileTypes.File;
             }

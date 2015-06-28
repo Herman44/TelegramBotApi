@@ -1,6 +1,6 @@
 ﻿using TelegramBotApi.Http;
 
-namespace Api.Requests.Types.Interfaces
+namespace TelegramBotApi.Requests.Types.Interfaces
 {
     public interface ITypeRequest
     {

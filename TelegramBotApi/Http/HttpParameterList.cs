@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace TelegramBotApi.Http
 {
@@ -48,7 +49,7 @@ namespace TelegramBotApi.Http
                 Add(new HttpParameter
                 {
                     Key = key,
-                    Value = Convert.ToString(value.Value)
+                    Value = Convert.ToString(value.Value, CultureInfo.InvariantCulture)
                 });
             }
         }

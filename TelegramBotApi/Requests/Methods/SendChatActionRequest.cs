@@ -1,6 +1,6 @@
-﻿using Api.Requests.Types;
-using TelegramBotApi.Http;
+﻿using TelegramBotApi.Http;
 using TelegramBotApi.Requests.Methods.Interfaces;
+using TelegramBotApi.Requests.Types;
 
 namespace TelegramBotApi.Requests.Methods
 {
