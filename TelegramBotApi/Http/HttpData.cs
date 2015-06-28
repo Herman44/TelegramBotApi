@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TelegramBotApi.Http
+﻿namespace TelegramBotApi.Http
 {
     public class HttpData
     {

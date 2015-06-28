@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TelegramBotApi.Http
 {
@@ -10,9 +7,9 @@ namespace TelegramBotApi.Http
     {
         public void Add(string key, string value)
         {
-            if (!String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
-                this.Add(new HttpParameter
+                Add(new HttpParameter
                 {
                     Key = key,
                     Value = value
@@ -24,7 +21,7 @@ namespace TelegramBotApi.Http
         {
             if (value.HasValue)
             {
-                this.Add(new HttpParameter
+                Add(new HttpParameter
                 {
                     Key = key,
                     Value = value.Value ? "1" : "0"
@@ -36,7 +33,7 @@ namespace TelegramBotApi.Http
         {
             if (value.HasValue)
             {
-                this.Add(new HttpParameter
+                Add(new HttpParameter
                 {
                     Key = key,
                     Value = Convert.ToString(value.Value)
@@ -48,7 +45,7 @@ namespace TelegramBotApi.Http
         {
             if (value.HasValue)
             {
-                this.Add(new HttpParameter
+                Add(new HttpParameter
                 {
                     Key = key,
                     Value = Convert.ToString(value.Value)

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TelegramBotApi.Responses.Types
+﻿namespace TelegramBotApi.Responses.Types
 {
-    public class UserProfilePhotosResponse 
+    public class UserProfilePhotosResponse
     {
         public static UserProfilePhotosResponse Parse(dynamic data)
         {
@@ -15,9 +9,7 @@ namespace TelegramBotApi.Responses.Types
                 return null;
             }
 
-            return new UserProfilePhotosResponse
-            {
-            };
+            return new UserProfilePhotosResponse();
         }
     }
 }

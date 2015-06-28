@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Web;
 
 namespace TelegramBotApi
 {
     public class DebugApi
     {
-        public bool Enabled { get; set; }
-
-        private HttpServerUtilityBase Server { get; set; }
-        private string DebugLogPath
-        {
-            get
-            {
-                return Path.Combine(Server.MapPath("~"), "TelegramBotApiDebugLog");
-            }
-        }
-
         public DebugApi(HttpServerUtilityBase server)
         {
             Server = server;
+        }
+
+        public bool Enabled { get; set; }
+        private HttpServerUtilityBase Server { get; set; }
+
+        private string DebugLogPath
+        {
+            get { return Path.Combine(Server.MapPath("~"), "TelegramBotApiDebugLog"); }
         }
 
         public void Log(string name, string data)
@@ -31,7 +25,7 @@ namespace TelegramBotApi
                 return;
             }
 
-            File.AppendAllText(DebugLogPath, String.Format("{0}: {1}", name, data));
+            File.AppendAllText(DebugLogPath, string.Format("{0}: {1}", name, data));
         }
     }
 }

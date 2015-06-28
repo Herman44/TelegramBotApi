@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TelegramBotApi.Responses.Types
+﻿namespace TelegramBotApi.Responses.Types
 {
-    public class AudioResponse 
+    public class AudioResponse
     {
+        public string FileId { get; set; }
+        public int Duration { get; set; }
+        public string MimeType { get; set; }
+        public int? FileSize { get; set; }
+
         public static AudioResponse Parse(dynamic data)
         {
             if (data == null)
@@ -23,10 +22,5 @@ namespace TelegramBotApi.Responses.Types
                 FileSize = data.file_size
             };
         }
-
-        public string FileId { get; set; }
-        public int Duration { get; set; }
-        public string MimeType { get; set; }
-        public int? FileSize { get; set; }
     }
 }

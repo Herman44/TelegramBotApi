@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TelegramBotApi.Responses.Types
+﻿namespace TelegramBotApi.Responses.Types
 {
-    public class VideoResponse 
+    public class VideoResponse
     {
         public static VideoResponse Parse(dynamic data)
         {
@@ -15,10 +9,7 @@ namespace TelegramBotApi.Responses.Types
                 return null;
             }
 
-            return new VideoResponse
-            {
-
-            };
+            return new VideoResponse();
         }
     }
 }

@@ -1,15 +1,15 @@
-﻿using TelegramBotApi.Responses.Types;
-using TelegramBotApi.Responses.Methods.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TelegramBotApi.Responses.Methods.Interfaces;
+using TelegramBotApi.Responses.Types;
 
 namespace TelegramBotApi.Responses.Methods
 {
     public class GetMeResponse : IMethodResponse
     {
+        public UserResponse Result { get; set; }
+        public bool Ok { get; set; }
+        public int? ErrorCode { get; set; }
+        public string Description { get; set; }
+
         public static GetMeResponse Parse(dynamic data)
         {
             if (data == null)
@@ -25,10 +25,5 @@ namespace TelegramBotApi.Responses.Methods
                 Result = UserResponse.Parse(data.result)
             };
         }
-
-        public bool Ok { get; set; }
-        public int? ErrorCode { get; set; }
-        public string Description { get; set; }
-        public UserResponse Result { get; set; }
     }
 }

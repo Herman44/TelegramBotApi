@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TelegramBotApi
 {
@@ -14,10 +10,7 @@ namespace TelegramBotApi
             {
                 return new DateTime(1970, 1, 1).AddSeconds(timestamp.Value);
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
     }
 }

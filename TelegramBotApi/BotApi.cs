@@ -1,24 +1,30 @@
-﻿using TelegramBotApi.Requests.Methods;
-using TelegramBotApi.Requests.Methods.Interfaces;
-using TelegramBotApi.Responses.Methods;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
+﻿using System;
+using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Web.Helpers;
 using System.Web;
-using System.IO;
+using System.Web.Helpers;
+using TelegramBotApi.Requests.Methods;
+using TelegramBotApi.Requests.Methods.Interfaces;
+using TelegramBotApi.Responses.Methods;
 using TelegramBotApi.Responses.Types;
-using System.Globalization;
 
 namespace TelegramBotApi
 {
     public class BotApi
     {
         private DebugApi debug;
+
+        public BotApi(string apiToken, HttpRequestBase request, HttpServerUtilityBase server, bool enableDebug = false)
+        {
+            ApiToken = apiToken;
+            Request = request;
+            Server = server;
+
+            Debug.Enabled = enableDebug;
+        }
+
         public DebugApi Debug
         {
             get
@@ -30,50 +36,33 @@ namespace TelegramBotApi
                 return debug;
             }
         }
+
         public int LastUpdateId
         {
-            get
-            {
-                return Convert.ToInt32(File.ReadAllText(LastUpdateIdPath));
-            }
-            set
-            {
-                File.WriteAllText(LastUpdateIdPath, Convert.ToString(value));
-            }
+            get { return Convert.ToInt32(File.ReadAllText(LastUpdateIdPath)); }
+            set { File.WriteAllText(LastUpdateIdPath, Convert.ToString(value)); }
         }
 
         private string ApiUrl
         {
-            get
-            {
-                return "https://api.telegram.org";
-            }
+            get { return "https://api.telegram.org"; }
         }
+
         private string ApiToken { get; set; }
         private HttpRequestBase Request { get; set; }
         private HttpServerUtilityBase Server { get; set; }
+
         private string LastUpdateIdPath
         {
-            get
-            {
-                return Path.Combine(Server.MapPath("~"), "TelegramBotApiLastUpdateId");
-            }
-        }
-
-        public BotApi(string apiToken, HttpRequestBase request, HttpServerUtilityBase server, bool enableDebug = false)
-        {
-            ApiToken = apiToken;
-            Request = request;
-            Server = server;
-
-            Debug.Enabled = enableDebug;
+            get { return Path.Combine(Server.MapPath("~"), "TelegramBotApiLastUpdateId"); }
         }
 
         private dynamic ExecuteAction(IMethodRequest request)
         {
-            var webRequest = WebRequest.Create(String.Format("{0}/bot{1}/{2}", ApiUrl, ApiToken, request.MethodName));
+            var webRequest = WebRequest.Create(string.Format("{0}/bot{1}/{2}", ApiUrl, ApiToken, request.MethodName));
             webRequest.Method = "POST";
-            var boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x", NumberFormatInfo.InvariantInfo);
+            var boundary = "---------------------------" +
+                           DateTime.Now.Ticks.ToString("x", NumberFormatInfo.InvariantInfo);
             webRequest.ContentType = "multipart/form-data; boundary=" + boundary;
             boundary = "--" + boundary;
 
@@ -86,7 +75,9 @@ namespace TelegramBotApi
                 {
                     var buffer = Encoding.ASCII.GetBytes(boundary + Environment.NewLine);
                     requestStream.Write(buffer, 0, buffer.Length);
-                    buffer = Encoding.ASCII.GetBytes(string.Format("Content-Disposition: form-data; name=\"{0}\"{1}{1}", parameter.Key, Environment.NewLine));
+                    buffer =
+                        Encoding.ASCII.GetBytes(string.Format("Content-Disposition: form-data; name=\"{0}\"{1}{1}",
+                            parameter.Key, Environment.NewLine));
                     requestStream.Write(buffer, 0, buffer.Length);
                     buffer = Encoding.UTF8.GetBytes(parameter.Value + Environment.NewLine);
                     requestStream.Write(buffer, 0, buffer.Length);
@@ -97,9 +88,14 @@ namespace TelegramBotApi
                 {
                     var buffer = Encoding.ASCII.GetBytes(boundary + Environment.NewLine);
                     requestStream.Write(buffer, 0, buffer.Length);
-                    buffer = Encoding.UTF8.GetBytes(string.Format("Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"{2}", file.Key, file.FileName, Environment.NewLine));
+                    buffer =
+                        Encoding.UTF8.GetBytes(
+                            string.Format("Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"{2}", file.Key,
+                                file.FileName, Environment.NewLine));
                     requestStream.Write(buffer, 0, buffer.Length);
-                    buffer = Encoding.ASCII.GetBytes(string.Format("Content-Type: {0}{1}{1}", file.ContentType, Environment.NewLine));
+                    buffer =
+                        Encoding.ASCII.GetBytes(string.Format("Content-Type: {0}{1}{1}", file.ContentType,
+                            Environment.NewLine));
                     requestStream.Write(buffer, 0, buffer.Length);
                     new MemoryStream(file.File).CopyTo(requestStream);
                     buffer = Encoding.ASCII.GetBytes(Environment.NewLine);

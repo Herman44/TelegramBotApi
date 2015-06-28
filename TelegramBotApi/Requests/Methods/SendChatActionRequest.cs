@@ -1,25 +1,26 @@
-﻿using TelegramBotApi.Requests.Types;
-using TelegramBotApi.Requests.Methods.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Api.Requests.Types;
+﻿using Api.Requests.Types;
 using TelegramBotApi.Http;
+using TelegramBotApi.Requests.Methods.Interfaces;
 
 namespace TelegramBotApi.Requests.Methods
 {
     public class SendChatActionRequest : IMethodRequest
     {
-        public string MethodName { get { return "sendChatAction"; } }
+        public int ChatId { get; set; }
+        public ActionRequest Action { get; set; }
+
+        public string MethodName
+        {
+            get { return "sendChatAction"; }
+        }
 
         public HttpData Parse()
         {
             var httpData = new HttpData
             {
-                Parameters = new HttpParameterList {
-                    { "chat_id", ChatId }
+                Parameters = new HttpParameterList
+                {
+                    {"chat_id", ChatId}
                 }
             };
 
@@ -30,8 +31,5 @@ namespace TelegramBotApi.Requests.Methods
 
             return httpData;
         }
-
-        public int ChatId { get; set; }
-        public ActionRequest Action { get; set; }
     }
 }

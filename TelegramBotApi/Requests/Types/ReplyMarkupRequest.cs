@@ -1,33 +1,10 @@
 ﻿using Api.Requests.Types.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TelegramBotApi.Http;
 
 namespace TelegramBotApi.Requests.Types
 {
     public class ReplyMarkupRequest : ITypeRequest
     {
-        public void Parse(HttpData httpData, string key)
-        {
-            switch (ReplyMarkupType)
-            {                    
-                case ReplyMarkupTypes.ReplyKeyboardMarkup:
-                    ReplyMarkupReplyKeyboardMarkup.Parse(httpData, key);
-                    break;
-                    
-                case ReplyMarkupTypes.ReplyKeyboardHide:
-                    ReplyMarkupReplyKeyboardHide.Parse(httpData, key);
-                    break;
-                    
-                case ReplyMarkupTypes.ForceReply:
-                    ReplyMarkupForceReply.Parse(httpData, key);
-                    break;
-            }
-        }
-
         public enum ReplyMarkupTypes
         {
             None,
@@ -36,21 +13,19 @@ namespace TelegramBotApi.Requests.Types
             ForceReply
         }
 
+        private ForceReplyRequest replyMarkupForceReply;
+        private ReplyKeyboardHideRequest replyMarkupReplyKeyboardHide;
+        private ReplyKeyboardMarkupRequest replyMarkupReplyKeyboardMarkup;
         private ReplyMarkupTypes replyMarkupType = ReplyMarkupTypes.None;
+
         public ReplyMarkupTypes ReplyMarkupType
         {
-            get
-            {
-                return replyMarkupType;
-            }
+            get { return replyMarkupType; }
         }
-        private ReplyKeyboardMarkupRequest replyMarkupReplyKeyboardMarkup;
+
         public ReplyKeyboardMarkupRequest ReplyMarkupReplyKeyboardMarkup
         {
-            get
-            {
-                return replyMarkupReplyKeyboardMarkup;
-            }
+            get { return replyMarkupReplyKeyboardMarkup; }
             set
             {
                 replyMarkupReplyKeyboardMarkup = value;
@@ -60,13 +35,10 @@ namespace TelegramBotApi.Requests.Types
                 replyMarkupType = value == null ? ReplyMarkupTypes.None : ReplyMarkupTypes.ReplyKeyboardMarkup;
             }
         }
-        private ReplyKeyboardHideRequest replyMarkupReplyKeyboardHide;
+
         public ReplyKeyboardHideRequest ReplyMarkupReplyKeyboardHide
         {
-            get
-            {
-                return replyMarkupReplyKeyboardHide;
-            }
+            get { return replyMarkupReplyKeyboardHide; }
             set
             {
                 replyMarkupReplyKeyboardMarkup = null;
@@ -76,13 +48,10 @@ namespace TelegramBotApi.Requests.Types
                 replyMarkupType = value == null ? ReplyMarkupTypes.None : ReplyMarkupTypes.ReplyKeyboardHide;
             }
         }
-        private ForceReplyRequest replyMarkupForceReply;
+
         public ForceReplyRequest ReplyMarkupForceReply
         {
-            get
-            {
-                return replyMarkupForceReply;
-            }
+            get { return replyMarkupForceReply; }
             set
             {
                 replyMarkupReplyKeyboardMarkup = null;
@@ -90,6 +59,24 @@ namespace TelegramBotApi.Requests.Types
                 replyMarkupForceReply = value;
 
                 replyMarkupType = value == null ? ReplyMarkupTypes.None : ReplyMarkupTypes.ForceReply;
+            }
+        }
+
+        public void Parse(HttpData httpData, string key)
+        {
+            switch (ReplyMarkupType)
+            {
+                case ReplyMarkupTypes.ReplyKeyboardMarkup:
+                    ReplyMarkupReplyKeyboardMarkup.Parse(httpData, key);
+                    break;
+
+                case ReplyMarkupTypes.ReplyKeyboardHide:
+                    ReplyMarkupReplyKeyboardHide.Parse(httpData, key);
+                    break;
+
+                case ReplyMarkupTypes.ForceReply:
+                    ReplyMarkupForceReply.Parse(httpData, key);
+                    break;
             }
         }
     }
