@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F7A9FF0D-3222-4DE4-BAF5-34FE1902E7D4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TelegramBotApi</RootNamespace>
+    <AssemblyName>TelegramBotApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BotApi.cs" />
+    <Compile Include="DebugApi.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Http\HttpFile.cs" />
+    <Compile Include="Http\HttpFileList.cs" />
+    <Compile Include="Http\HttpParameter.cs" />
+    <Compile Include="Http\HttpData.cs" />
+    <Compile Include="Http\HttpParameterList.cs" />
+    <Compile Include="Requests\Methods\ForwardMessageRequest.cs" />
+    <Compile Include="Requests\Methods\GetUpdatesRequest.cs" />
+    <Compile Include="Requests\Methods\GetMeRequest.cs" />
+    <Compile Include="Requests\Methods\Interfaces\IMethodRequest.cs" />
+    <Compile Include="Requests\Methods\SendAudioRequest.cs" />
+    <Compile Include="Requests\Methods\SendChatActionRequest.cs" />
+    <Compile Include="Requests\Methods\GetUserProfilePhotosRequest.cs" />
+    <Compile Include="Requests\Methods\SetWebhookRequest.cs" />
+    <Compile Include="Requests\Methods\SendLocationRequest.cs" />
+    <Compile Include="Requests\Methods\SendVideoRequest.cs" />
+    <Compile Include="Requests\Methods\SendStickerRequest.cs" />
+    <Compile Include="Requests\Methods\SendMessageRequest.cs" />
+    <Compile Include="Requests\Methods\SendDocumentRequest.cs" />
+    <Compile Include="Requests\Methods\SendPhotoRequest.cs" />
+    <Compile Include="Requests\Types\ActionRequest.cs" />
+    <Compile Include="Requests\Types\ForceReplyRequest.cs" />
+    <Compile Include="Requests\Types\InputFileRequest.cs" />
+    <Compile Include="Requests\Types\Interfaces\ITypeRequest.cs" />
+    <Compile Include="Requests\Types\ReplyKeyboardHideRequest.cs" />
+    <Compile Include="Requests\Types\ReplyKeyboardMarkupRequest.cs" />
+    <Compile Include="Requests\Types\ReplyMarkupRequest.cs" />
+    <Compile Include="Responses\Methods\ForwardMessageResponse.cs" />
+    <Compile Include="Responses\Methods\SendChatActionResponse.cs" />
+    <Compile Include="Responses\Methods\GetUpdatesResponse.cs" />
+    <Compile Include="Responses\Methods\GetMeResponse.cs" />
+    <Compile Include="Responses\Methods\Interfaces\IMethodResponse.cs" />
+    <Compile Include="Responses\Methods\SendAudioResponse.cs" />
+    <Compile Include="Responses\Methods\SetWebhookResponse.cs" />
+    <Compile Include="Responses\Methods\SendLocationResponse.cs" />
+    <Compile Include="Responses\Methods\GetUserProfilePhotosResponse.cs" />
+    <Compile Include="Responses\Methods\SendVideoResponse.cs" />
+    <Compile Include="Responses\Methods\SendStickerResponse.cs" />
+    <Compile Include="Responses\Methods\SendMessageResponse.cs" />
+    <Compile Include="Responses\Methods\SendDocumentResponse.cs" />
+    <Compile Include="Responses\Methods\SendPhotoResponse.cs" />
+    <Compile Include="Responses\Types\AudioResponse.cs" />
+    <Compile Include="Responses\Types\ContactResponse.cs" />
+    <Compile Include="Responses\Types\DocumentResponse.cs" />
+    <Compile Include="Responses\Types\GroupChatResponse.cs" />
+    <Compile Include="Responses\Types\InputFileResponse.cs" />
+    <Compile Include="Responses\Types\LocationResponse.cs" />
+    <Compile Include="Responses\Types\MessageResponse.cs" />
+    <Compile Include="Responses\Types\PhotoSizeResponse.cs" />
+    <Compile Include="Responses\Types\StickerResponse.cs" />
+    <Compile Include="Responses\Types\UpdateResponse.cs" />
+    <Compile Include="Responses\Types\UserResponse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responses\Types\UserProfilePhotosResponse.cs" />
+    <Compile Include="Responses\Types\VideoResponse.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

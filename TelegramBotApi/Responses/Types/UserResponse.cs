@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TelegramBotApi.Responses.Types
+{
+    public class UserResponse 
+    {
+        public static UserResponse Parse(dynamic data)
+        {
+            if (data == null)
+            {
+                return null;
+            }
+
+            return new UserResponse
+            {
+                Id = data.id,
+                FirstName = data.first_name,
+                LastName = data.last_name,
+                UserName = data.username
+            };
+        }
+
+        /// <summary>
+        /// Unique identifier for this user or bot
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
+        /// User's or bot's first name
+        /// </summary>
+        public string FirstName { get; set; }
+        /// <summary>
+        /// Optional. User's or bot's last name
+        /// </summary>
+        public string LastName { get; set; }
+        /// <summary>
+        /// Optional. User's or bot's username
+        /// </summary>
+        public string UserName { get; set; }
+    }
+}
